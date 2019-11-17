@@ -1,16 +1,21 @@
 <head>
     <meta charset="UTF-8">
+    <style>
+    .mb1 {
+        margin-bottom: 1rem;
+    }
+    </style>
 </head>
 <div>
-    Hello world
+    FitRogue
     <div id="shop">
-        <div>
+        <div class="mb1">
             <span id="stepscurrent"></span> steps: <span id="activitycoinsorig"></span> activity rolls. <span id="stepsupgrade"></span><br/>
             <span id="sleepcurrent"></span> hours sleeping: <span id="sleepcoinsorig"></span> energy rolls. <span id="sleepupgrade"></span><br />
             <span id="exercisecurrent"></span> minutes exercising: <span id="exercisecoinsorig"></span> exercise rolls. <span id="exerciseupgrade"></span><br />
             <span id="meditationcurrent"></span>: <span id="meditationcoinsorig"></span> meditation rolls. <span id="meditationupgrade"></span><br />
         </div>
-        <div>
+        <div class="mb1">
             Remaining rolls:
             Steps: <span id="steprollsleft"></span>
             Sleep: <span id="sleeprollsleft"></span>
@@ -18,7 +23,8 @@
             Meditation: <span id="meditationrollsleft"></span>
         </div>
 
-        <div id="resource">
+        <div class="mb1">
+            Current roll: <span id="resource"></span>
         </div>
         <div id="message">
         </div>
@@ -38,7 +44,7 @@
         <div id="item3stats"></div>
         <button id="item3b">Item 3</button>
     </div>
-    <div>Equipped items: <br />
+    <div class="mb1">Equipped items: <br />
         Weapon: <span id="chosenweapon"></span><br />
         Helmet: <span id="chosenhead"></span><br />
         Chest: <span id="chosenchest"></span><br />
@@ -242,6 +248,7 @@
     }
 
     function updateItems(res) {
+        document.getElementById('resource').innerHTML = res;
         var message = "Choose an item!";
         document.getElementById("message").innerHTML = message;
         var item_roll = getItems(res, 3);

@@ -1,6 +1,6 @@
 import os
 from datetime import date, timedelta, datetime
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, jsonify
 from flask_dance.contrib.google import make_google_blueprint, google
 import json
 from ruamel.yaml import YAML
@@ -58,7 +58,7 @@ def shop(stats):
         res_l.append(item)
         item_dict[item["resource"]] = res_l
 
-    return render_template("shop.html", resources=resources, items=item_dict.encode(encoding='UTF-8'), stats=stats)
+    return render_template("shop.html", resources=resources, items=json.dumps(item_dict, ensure_ascii=False).encode('utf8'), stats=stats)
 
 
 @app.route("/home")
