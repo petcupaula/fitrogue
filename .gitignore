@@ -1,0 +1,8 @@
+__pycache__
+.pytest_cache
+
+
+node_modules
+phaser3-examples
+package-lock.json
+.DS_Store

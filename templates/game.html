@@ -1,0 +1,160 @@
+<head>
+    <meta charset="UTF-8">
+    <style>
+    html,body {
+  font-family: 'Raleway', sans-serif;
+  padding: 1em 2em;
+  font-size: 18px;
+  background: #222;
+  color: #aaa
+}
+
+h1,h2 {
+  font-weight: 200;
+  margin: 0.4em 0;
+}
+h1 { font-size: 3.5em; }
+h2 {
+  color: #888;
+  font-size: 2em;
+}
+    </style>
+</head>
+
+<link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" />
+<h1>Player
+    <span id="player" class="txt-rotate"></span>
+</h1>
+<h1>Enemy
+    <span id="enemy" class="txt-rotate"></span>
+</h1>
+<h2><span id="description" class="txt-rotate"></span></h2>
+<h3><span id="statsdiv"></span></h2>
+<input type="range" min="0.1" max="50" value="1" class="slider" id="speedmultiplier">
+<script src="/static/script/runes.js"></script>
+<script>
+    var require = (function () {
+        var cache = {};
+        function loadScript(url) {
+            var xhr = new XMLHttpRequest(),
+                fnBody;
+            xhr.open('get', url, false);
+            xhr.send();
+            if (xhr.status === 200 && xhr.getResponseHeader('Content-Type') === 'application/x-javascript') {
+                fnBody = 'var exports = {};\n' + xhr.responseText + '\nreturn exports;';
+                cache[url] = (new Function(fnBody)).call({});
+            }
+        }
+        function resolve(module) {
+            //TODO resolve urls
+            return module;
+        }
+        function require(module) {
+            var url = resolve(module);
+            if (!Object.prototype.hasOwnProperty.call(cache, url)) {
+                loadScript(url);
+            }
+            return cache[url];
+        }
+        require.cache = cache;
+        require.resolve = resolve;
+        return require;
+    }());
+
+    var speed = {
+        type: 300,
+        delay: 2000,
+        round: 4000,
+        multiplier: 1.0
+    }
+
+    var TxtRotate = function (el, textToDisplay, period) {
+        this.toRotate = [textToDisplay];
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.isDeleting = false;
+        this.tick();
+    };
+
+    TxtRotate.prototype.tick = function () {
+        var i = 0;
+        // var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+        var txtlength = runes(this.txt).length;
+        if (this.isDeleting) {
+            this.txt = runes.substr(fullTxt, 0, txtlength - 1);
+        } else {
+            this.txt = runes.substr(fullTxt, 0, txtlength + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+        var that = this;
+        var delta = (speed.type * speed.multiplier)/ runes(fullTxt).length;
+        // console.log(runes(fullTxt).length + "    " +delta);
+
+        // if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            console.log('individualend');
+            return //No settimeout
+        }
+        setTimeout(function () {
+            that.tick();
+        }, delta);
+    };
+
+    window.onload = function () {
+        var input = {{ log|safe }};
+        var loopindex = 0;
+        var playerd = document.getElementById('player');
+        var enemyd = document.getElementById('enemy');
+        var descriptiond = document.getElementById('description');
+
+        function showStats(stats) {
+            document.getElementById("statsdiv").innerHTML = stats;
+        }
+
+        var intfunc;
+        function looptext () {
+            console.log('startingloop')
+            var loopnow = input[loopindex];
+            new TxtRotate(playerd, loopnow[0], speed.delay*speed.multiplier);
+            new TxtRotate(enemyd, loopnow[1], speed.delay*speed.multiplier);
+            new TxtRotate(descriptiond, loopnow[2], speed.delay*speed.multiplier);
+            setTimeout(showStats(loopnow[3], speed.type*speed.multiplier))
+            loopindex++;
+            if (loopindex >= input.length) {
+                clearInterval(intfunc);
+            }
+        }
+        looptext();
+        intfunc = setInterval(looptext, speed.round*speed.multiplier);
+        var rangeInput = document.getElementById('speedmultiplier');
+        rangeInput.addEventListener("change", function () {
+            speed.multiplier = rangeInput.value;
+        }, false);
+
+
+        // var elements = document.getElementsByClassName('txt-rotate');
+        // for (var i = 0; i < elements.length; i++) {
+        //     var toRotate = elements[i].getAttribute('data-rotate');
+        //     var period = elements[i].getAttribute('data-period');
+        //     if (toRotate) {
+        //         new TxtRotate(elements[i], JSON.parse(toRotate), 2000);
+        //     }
+        // }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+        document.body.appendChild(css);
+    };
+</script>

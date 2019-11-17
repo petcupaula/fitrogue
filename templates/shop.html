@@ -1,0 +1,284 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+<div>
+    Hello world
+    <div id="shop">
+        <div>
+            <span id="stepscurrent"></span> steps: <span id="activitycoinsorig"></span> activity rolls. <span id="stepsupgrade"></span><br/>
+            <span id="sleepcurrent"></span> hours sleeping: <span id="sleepcoinsorig"></span> energy rolls. <span id="sleepupgrade"></span><br />
+            <span id="exercisecurrent"></span> minutes exercising: <span id="exercisecoinsorig"></span> exercise rolls. <span id="exerciseupgrade"></span><br />
+            <span id="meditationcurrent"></span>: <span id="meditationcoinsorig"></span> meditation rolls. <span id="meditationupgrade"></span><br />
+        </div>
+        <div>
+            Remaining rolls:
+            Steps: <span id="steprollsleft"></span>
+            Sleep: <span id="sleeprollsleft"></span>
+            Exercise: <span id="exerciserollsleft"></span>
+            Meditation: <span id="meditationrollsleft"></span>
+        </div>
+
+        <div id="resource">
+        </div>
+        <div id="message">
+        </div>
+        <div id="item1name"></div>
+        <div id="item1icon"></div>
+        <div id="item1desc"></div>
+        <div id="item1stats"></div>
+        <button id="item1b">Item 1</button>
+        <div id="item2name"></div>
+        <div id="item2icon"></div>
+        <div id="item2desc"></div>
+        <div id="item2stats"></div>
+        <button id="item2b">Item 2</button>
+        <div id="item3name"></div>
+        <div id="item3icon"></div>
+        <div id="item3desc"></div>
+        <div id="item3stats"></div>
+        <button id="item3b">Item 3</button>
+    </div>
+    <div>Equipped items: <br />
+        Weapon: <span id="chosenweapon"></span><br />
+        Helmet: <span id="chosenhead"></span><br />
+        Chest: <span id="chosenchest"></span><br />
+        Pet: <span id="chosenpet"></span>
+    </div>
+</div>
+
+<script>
+    var stats = {{ stats|safe }};
+    var resources = {{ resources|safe }};
+    var resourcelist = Object.keys(resources)
+    var items = {{ items.decode(encoding = 'UTF-8')|safe }};
+    var selected = {
+        "helmet": null,
+        "chest": null,
+        "weapon": null,
+        "pet": null,
+    };
+
+    function findThreshold(limits, stat) {
+        var lowerthanlimit = true;
+        for (var i = 0; i < limits.length; i++) {
+            var range = limits[i];
+            if (stat < range[0]) {
+                break
+            } else if (stat > range[1]) {
+                lowerthanlimit = false;
+                break
+            }
+        }
+        return([i, lowerthanlimit])
+    }
+
+    function initial_load() {
+        document.getElementById('stepscurrent').innerHTML = stats["steps_count"];
+        document.getElementById('sleepcurrent').innerHTML = stats["sleep_hours"];
+        document.getElementById('exercisecurrent').innerHTML = stats["workout_mins"];      
+        var medtext;
+        if (stats["meditation_mins"] > 1) {
+            medtext = "You meditated"
+        } else {
+            medtext = "You didn't meditate"
+        }
+        document.getElementById('meditationcurrent').innerHTML = medtext;
+        document.getElementById('activitycoinsorig').innerHTML = resources["steps"];
+        document.getElementById('sleepcoinsorig').innerHTML = resources["sleep"];
+        document.getElementById('exercisecoinsorig').innerHTML = resources["exercise"];
+        document.getElementById('meditationcoinsorig').innerHTML = resources["meditation"];
+        var limits = {
+            "sleep": [[6.5, Infinity,1],[7,10,2],[7.15,8.5,3]],
+            "activity": [[4000, Infinity,1],[7000, Infinity,2],[10000, Infinity,3]],
+            "exercise": [[5, Infinity,1],[25, Infinity,3]],
+            "meditation": [[1, Infinity, 1]],
+        };
+        var text;
+        var pair = findThreshold(limits["activity"], stats["steps_count"]);
+
+        if (pair[0] === limits["activity"].length) {
+            text = "Good job, you got the maximum number of rolls."
+        } else {
+            text = "Next roll unlocked at " + limits["activity"][pair[0]][0] + " steps minimum.";
+        }
+        document.getElementById('stepsupgrade').innerHTML = text;
+
+        
+        pair = findThreshold(limits["sleep"], stats["sleep_hours"]);
+
+        if (pair[0] === limits["sleep"].length) {
+            text = "Good job, you got the maximum number of rolls."
+        } else if (pair[1]) {
+            text = "Next roll unlocked at " + limits["sleep"][pair[0]][0] + " hours minimum.";
+        } else {
+            text = "Next roll unlocked at " + limits["sleep"][pair[0]][1] + " hours maximum. (You slept too much!).";
+        }
+        document.getElementById('sleepupgrade').innerHTML = text;
+
+
+        var pair = findThreshold(limits["exercise"], stats["workout_mins"]);
+
+        if (pair[0] === limits["exercise"].length) {
+            text = "Good job, you got the maximum number of rolls."
+        } else {
+            text = "Next roll unlocked at " + limits["exercise"][pair[0]][0] + " minutes of exercising.";
+        }
+        document.getElementById('exerciseupgrade').innerHTML = text;
+
+        var pair = findThreshold(limits["meditation"], stats["meditation_mins"]);
+
+        if (pair[0] === limits["meditation"].length) {
+            text = "Good job, you got the maximum number of rolls."
+        } else {
+            text = "Meditate to unlock the meditation roll.";
+        }
+        document.getElementById('meditationupgrade').innerHTML = text;
+
+    }
+
+    function updateStats() {
+        document.getElementById('steprollsleft').innerHTML = resources['steps'];
+
+        document.getElementById('sleeprollsleft').innerHTML = resources['sleep'];
+
+        document.getElementById('exerciserollsleft').innerHTML = resources['exercise'];
+
+        document.getElementById('meditationrollsleft').innerHTML = resources['meditation'];
+        var item = "None";
+        if (selected.helmet !== null) {
+            item = selected.helmet.display_name;
+        }
+        document.getElementById('chosenhead').innerHTML = item;
+        item = "None";
+        if (selected.chest !== null) {
+            item = selected.chest.display_name;
+        }
+        document.getElementById('chosenchest').innerHTML = item;
+        item = "None";
+        if (selected.weapon !== null) {
+            item = selected.weapon.display_name;
+        }
+        document.getElementById('chosenweapon').innerHTML = item;
+        item = "None";
+        if (selected.pet !== null) {
+            item = selected.pet.display_name;
+        }
+        document.getElementById('chosenpet').innerHTML = item;
+        
+    }
+
+    function newItem(res) {
+        var update = true;
+        while (resources[res] <= 0) {
+            var currentIndex = resourcelist.indexOf(res);
+            if (currentIndex < resourcelist.length -1) {
+                res = resourcelist[currentIndex + 1];
+            } else {
+                var helmet = selected.helmet ? selected.helmet.name : null;
+                var chest = selected.chest ? selected.chest.name : null;
+                var weapon = selected.weapon ? selected.weapon.name : null;
+                var pet = selected.pet ? selected.pet.name : null;
+
+                var formData = JSON.stringify([helmet, chest, weapon, pet]);
+                document.getElementById("shop").innerHTML = "<form action='/game' method='post'><input style='display: none;' name='selecteditems' value=" + formData + "></input><button>submit</button></form>"
+                update = false;
+                break
+            }
+        }
+        if (update) {
+            updateItems(res);
+        }
+    }
+
+    function addSelected(res, item) {
+        resources[res]--;
+        selected[item.slot] = item;
+        for (var i = 0; i < items[res].length; i++) {
+            if (item === items[res][i].name) {
+                items[res].splice(i, 1);
+                break;
+            }
+        }
+        updateStats();
+        newItem(res);
+    }
+
+    function getRandom(arr, n) {
+        var result = new Array(n),
+            len = arr.length,
+            taken = new Array(len);
+        if (n > len)
+            throw new RangeError("getRandom: more elements taken than available");
+        while (n--) {
+            var x = Math.floor(Math.random() * len);
+            result[n] = arr[x in taken ? taken[x] : x];
+            taken[x] = --len in taken ? taken[len] : len;
+        }
+        return result;
+    }
+
+    function getItems(res, n) {
+        return getRandom(items[res], n)
+        // var itemindex = Math.floor(Math.random() * (items[res].length))
+        // console.log(itemindex + res)
+        // console.log(items[res])
+
+        // var item = items[res][itemindex];
+        // return item;
+    }
+
+    function showItem(item, id) {
+        var possibleStats = ["attack", "attack_max", "health", "armor", "stamina"];
+        var stats = "";
+        for (var i = 0; i < possibleStats.length; i++) {
+            if (item[possibleStats[i]] > 0) {
+                stats = stats + " " + item[possibleStats[i]] + " " + possibleStats[i];
+            }
+        }
+        document.getElementById(id+"name").innerHTML = item.display_name;
+        document.getElementById(id +"icon").innerHTML = item.icon;
+        document.getElementById(id +"desc").innerHTML = item.description;
+        document.getElementById(id +"stats").innerHTML = stats;
+    }
+
+    function updateItems(res) {
+        var message = "Choose an item!";
+        document.getElementById("message").innerHTML = message;
+        var item_roll = getItems(res, 3);
+        var item1 = item_roll[0];
+        showItem(item1, "item1");
+        document.getElementById("item1b").onclick = function() {
+            addSelected(res, item1);
+        }
+        var item2 = item_roll[1];
+        showItem(item2, "item2");
+        document.getElementById("item2b").onclick = function () {
+            addSelected(res, item2);
+        }
+        var item3 = item_roll[2];
+        showItem(item3, "item3");
+        document.getElementById("item3b").onclick = function () {
+            addSelected(res, item3);
+        }
+    }
+
+    function main() {
+        initial_load();
+        updateStats();
+        var i;
+        var res;
+        for (i = 0; i < resourcelist.length; i++) {
+            if (resources[resourcelist[i]] > 0) {
+                res = resourcelist[i];
+                break;
+            }
+        }
+        if (res !== undefined) {
+            newItem(res);
+        } else {
+            console.log("No resources")
+        }
+    }
+    main();
+    
+</script>

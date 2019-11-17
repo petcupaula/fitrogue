@@ -1,0 +1,22 @@
+
+"basic":
+  "goblin":
+    - {icon: 👺, "name": "Goblin", "attack": 5, "attack_max": 10, "health": 20, "stamina": 40, "armor": 0}
+    - {icon: 👺, "name": "Orc", "attack": 7, "attack_max": 9, "health": 30, "stamina": 20, "armor": 1}
+  "ghost": 
+    - {"icon": 👻,"name": "Boo", "attack": 10, "attack_max": 15, "health": 10, "stamina": 40, "armor": 0}
+    - {"icon": 👻,"name": "Big boo", "attack": 1, "attack_max": 25, "health": 15, "stamina": 20, "armor": 0}
+  "undead":
+    - {"icon": 💀,"name": "Skeleton", "attack": 4, "attack_max": 6, "health": 25, "stamina": 40, "armor": 0}
+    - {"icon": 💀,"name": "Zombie", "attack": 3, "attack_max": 7, "health": 30, "stamina": 40, "armor": 0}
+  "robot":
+    - {"icon": 🤖,"name": "Painbot", "attack": 10, "attack_max": 15, "health": 25, "stamina": 40, "armor": 1}
+    - {"icon": 🤖,"name": "PiBot", "attack": 1, "attack_max": 30, "health": 35, "stamina": 40, "armor": 1}
+  "alien":
+    - {"icon": 👽,"name": "Martian", "attack": 8, "attack_max": 12, "health": 50, "stamina": 40, "armor": 0}
+    - {"icon": 👽,"name": "Venusian", "attack": 5, "attack_max": 15, "health": 50, "stamina": 40, "armor": 0}
+"boss":
+  "first":
+    - {icon: 💤😪, name: "Lord Lazy", "attack": 20, "attack_max": 25, "health": 75, "stamina": 30, "armor": 4}
+  "second":
+    - {icon: 🍻🥴, name: "Drunken Bastard", "attack": 1, "attack_max": 30, "health": 75, "stamina": 70, "armor": 4}

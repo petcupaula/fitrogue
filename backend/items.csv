@@ -1,0 +1,44 @@
+﻿gloves;icon;🥊;display_name;Gloves;name;gloves;slot;weapon;attack;5;attack_max;10;health;0;armor;0;stamina;0;resource;workout;effect;"[""Goblin Smasher""]";description;Gloves
+knuckles;icon;🥊;display_name;Knuckles;name;knuckles;slot;weapon;attack;8;attack_max;12;health;0;armor;0;stamina;0;resource;workout;effect;"[""Goblin Smasher""]";description;Knuckles
+boxing_gloves;icon;🥊;display_name;Boxing Gloves;name;boxing_gloves;slot;weapon;attack;10;attack_max;15;health;0;armor;0;stamina;0;resource;workout;effect;"[""Goblin Smasher""]";description;Boxing Gloves
+bike_helmet;icon;⛑;display_name;Bike Helmet;name;bike_helmet;slot;helmet;attack;0;attack_max;0;health;0;armor;0;stamina;10;resource;workout;effect;[];description;Bike Helmet
+hard_hat;icon;⛑;display_name;Hard Hat;name;hard_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;0;stamina;20;resource;workout;effect;[];description;Hard Hat
+firehat;icon;⛑;display_name;FireHat;name;firehat;slot;helmet;attack;0;attack_max;0;health;0;armor;0;stamina;30;resource;workout;effect;[];description;FireHat
+briefs;icon;🩲;display_name;Briefs;name;briefs;slot;chest;attack;0;attack_max;0;health;0;armor;2;stamina;0;resource;workout;effect;[];description;Briefs
+speedo;icon;🩲;display_name;Speedo;name;speedo;slot;chest;attack;0;attack_max;0;health;0;armor;3;stamina;0;resource;workout;effect;[];description;Speedo
+powerlift;icon;🩲;display_name;Power Lift;name;powerlift;slot;chest;attack;0;attack_max;0;health;0;armor;4;stamina;0;resource;workout;effect;[];description;Power Lift
+knife;icon;🔪;display_name;Knife;name;knife;slot;weapon;attack;7;attack_max;8;health;0;armor;0;stamina;0;resource;activity;effect;[];description;Knife
+blade;icon;🔪;display_name;Blade;name;blade;slot;weapon;attack;9;attack_max;11;health;0;armor;0;stamina;0;resource;activity;effect;[];description;Blade
+sword;icon;🔪;display_name;Sword;name;sword;slot;weapon;attack;12;attack_max;13;health;0;armor;0;stamina;0;resource;activity;effect;[];description;Sword
+woven_hat;icon;👒;display_name;Woven Hat;name;woven_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;1;stamina;10;resource;activity;effect;[];description;Woven Hat
+flower_hat;icon;👒;display_name;Flower Hat;name;flower_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;2;stamina;20;resource;activity;effect;[];description;Flower Hat
+rose_hat;icon;👒;display_name;Rose Hat;name;rose_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;3;stamina;30;resource;activity;effect;[];description;Rose Hat
+blouse;icon;👚;display_name;Blouse;name;blouse;slot;chest;attack;0;attack_max;0;health;0;armor;3;stamina;0;resource;activity;effect;"[""Probe Protector""]";description;Blouse
+armored_blouse;icon;👚;display_name;Armored Blouse;name;armored_blouse;slot;chest;attack;0;attack_max;0;health;0;armor;4;stamina;0;resource;activity;effect;"[""Probe Protector""]";description;Armored Blouse
+the_armored_blouse;icon;👚;display_name;The Armored Blouse;name;the_armored_blouse;slot;chest;attack;0;attack_max;0;health;0;armor;6;stamina;0;resource;activity;effect;"[""Probe Protector""]";description;The Armored Blouse
+toy_bow;icon;🏹;display_name;Toy Bow;name;toy_bow;slot;weapon;attack;1;attack_max;14;health;0;armor;0;stamina;0;resource;sleep;effect;[];description;Toy Bow
+bow;icon;🏹;display_name;Bow;name;bow;slot;weapon;attack;5;attack_max;15;health;0;armor;0;stamina;0;resource;sleep;effect;[];description;Bow
+composite_bow;icon;🏹;display_name;Composite Bow;name;composite_bow;slot;weapon;attack;5;attack_max;20;health;0;armor;0;stamina;0;resource;sleep;effect;[];description;Composite Bow
+bachelors_hat;icon;🎓;display_name;Bachelors Hat;name;bachelors_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;2;stamina;20;resource;sleep;effect;"[""Dream Warden""]";description;Bachelors Hat
+masters_hat;icon;🎓;display_name;Masters Hat;name;masters_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;3;stamina;30;resource;sleep;effect;"[""Dream Warden""]";description;Masters Hat
+doctorate_hat;icon;🎓;display_name;Doctorate Hat;name;doctorate_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;4;stamina;40;resource;sleep;effect;"[""Dream Warden""]";description;Doctorate Hat
+tshirt;icon;👕;display_name;T-shirt;name;tshirt;slot;chest;attack;0;attack_max;0;health;0;armor;1;stamina;0;resource;sleep;effect;[];description;T-shirt
+blue_tshirt;icon;👕;display_name;Blue T-shirt;name;blue_tshirt;slot;chest;attack;0;attack_max;0;health;0;armor;2;stamina;0;resource;sleep;effect;[];description;Blue T-shirt
+junction_tshirt;icon;👕;display_name;Junction T-Shirt;name;junction_tshirt;slot;chest;attack;0;attack_max;0;health;0;armor;3;stamina;0;resource;sleep;effect;[];description;Junction T-Shirt
+toy_hammer;icon;🔨;display_name;Toy Hammer;name;toy_hammer;slot;weapon;attack;6;attack_max;9;health;0;armor;0;stamina;0;resource;meditation;effect;[];description;Toy Hammer
+hammer;icon;🔨;display_name;Hammer;name;hammer;slot;weapon;attack;8;attack_max;12;health;0;armor;0;stamina;0;resource;meditation;effect;[];description;Hammer
+smasher;icon;🔨;display_name;Smasher;name;smasher;slot;weapon;attack;7;attack_max;18;health;0;armor;0;stamina;0;resource;meditation;effect;[];description;Smasher
+cap;icon;🧢;display_name;Cap;name;cap;slot;helmet;attack;0;attack_max;0;health;0;armor;1;stamina;10;resource;meditation;effect;[];description;Cap
+baseball_cap;icon;🧢;display_name;Baseball Cap;name;baseball_cap;slot;helmet;attack;0;attack_max;0;health;0;armor;2;stamina;20;resource;meditation;effect;[];description;Baseball Cap
+the_batters_hat;icon;🧢;display_name;The Batters Hat;name;the_batters_hat;slot;helmet;attack;0;attack_max;0;health;0;armor;3;stamina;30;resource;meditation;effect;[];description;The Batters Hat
+old_shirt;icon;🎽;display_name;Old Shirt;name;old_shirt;slot;chest;attack;0;attack_max;0;health;0;armor;2;stamina;0;resource;meditation;effect;[];description;Old Shirt
+jogger_shirt;icon;🎽;display_name;Joggers Shirt;name;jogger_shirt;slot;chest;attack;0;attack_max;0;health;0;armor;4;stamina;0;resource;meditation;effect;[];description;Joggers Shirt
+swiftwind;icon;🎽;display_name;Swiftwind;name;swiftwind;slot;chest;attack;0;attack_max;0;health;0;armor;5;stamina;0;resource;meditation;effect;[];description;Swiftwind
+dog;icon;🐕;display_name;Spot;name;dog;slot;pet;attack;0;attack_max;0;health;0;armor;0;stamina;5;resource;activity;effect;[];description;Spot
+poodle;icon;🐩;display_name;Fido;name;poodle;slot;pet;attack;0;attack_max;0;health;0;armor;0;stamina;10;resource;activity;effect;[];description;Fido
+fish;icon;🐟;display_name;Glub;name;fish;slot;pet;attack;0;attack_max;0;health;0;armor;0;stamina;0;resource;meditation;effect;"[""Short Circuit""]";description;Glub
+tropical_fish;icon;🐠;display_name;Bubbles;name;tropical_fish;slot;pet;attack;0;attack_max;0;health;0;armor;0;stamina;0;resource;meditation;effect;"[""Short Circuit""]";description;Bubbles
+duck;icon;🦆;display_name;Quakers;name;duck;slot;pet;attack;0;attack_max;1;health;0;armor;0;stamina;0;resource;workout;effect;[];description;Quakers
+owl;icon;🦉;display_name;Hoots;name;owl;slot;pet;attack;0;attack_max;2;health;0;armor;0;stamina;0;resource;workout;effect;[];description;Hoots
+butterflu;icon;🦋;display_name;Sparkles;name;butterflu;slot;pet;attack;0;attack_max;0;health;0;armor;1;stamina;0;resource;sleep;effect;[];description;Sparkles
+bee;icon;🐝;display_name;Stings;name;bee;slot;pet;attack;0;attack_max;0;health;10;armor;0;stamina;0;resource;sleep;effect;[];description;Stings
