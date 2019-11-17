@@ -8,8 +8,8 @@ monster_attributes = [""]
 global combat_log
 combat_log = []
 tribes = ["👺", "👻", "💀", "🤖", "👽"]
-food = ["🥗", "🥙", "🥦", "🥬", "🥙","🍲","🍛","🧆"]
-friend = ["🥺", "🤩", "🧐","🤪","😚","🥰","😇","😬"]
+food = ["🥗", "🥙", "🥦", "🥬", "🥙", "🍲", "🍛", "🧆"]
+friend = ["🥺", "🤩", "🧐", "🤪", "😚", "🥰", "😇", "😬"]
 
 yaml = YAML(typ='safe')  # default, if not specfied, is 'rt' (round-trip)
 with open("backend/monsters.yaml", "r") as monster_file:
@@ -32,6 +32,7 @@ hero_attributes = {
     "stamina": 50,
     "effect": []
 }
+
 
 class Character():
     def __init__(self, attributes: dict):
@@ -65,7 +66,7 @@ class Character():
                 bonus_damage = 2
             if opponent.attributes["icon"] == "👽" and "Probe Protector" in self.attributes.get("effect", []):
                 bonus_damage = 2
-        damage=random.randint(self.attributes["attack"], self.attributes["attack_max"]) + bonus_damage
+        damage = random.randint(self.attributes["attack"], self.attributes["attack_max"]) + bonus_damage
         opponent.get_hurt(damage, self)
 
     def get_hurt(self, raw_damage, opponent):
@@ -95,9 +96,9 @@ class Character():
             return 0
 
     def see_stats(self):
-        return f"Attack: {self.attributes['attack']}-{self.attributes['attack_max']}\tArmor: {self.attributes['armor']}\tHealth: {self.attributes['health']}\tStamina: {self.attributes['stamina']}\tPerks: {','.join(self.attributes['effect'])}"
+        return f"ATK:{self.attributes['attack']}-{self.attributes['attack_max']} DEF:{self.attributes['armor']} LIFE:{self.attributes['health']} STAM:{self.attributes['stamina']}\nPERKS: {','.join(self.attributes['effect'])}"
         return self.attributes.items()
-        
+
 
 def choose_random_monster(type: str = "basic", tribe: str = None):
     if tribe is not None:
@@ -108,6 +109,7 @@ def choose_random_monster(type: str = "basic", tribe: str = None):
 
     attributes = random.sample(monsters_in_tribe, 1)[0]
     return attributes
+
 
 def enter_the_dungeon(hero: Character):
     monsters = []
@@ -133,9 +135,16 @@ def enter_the_dungeon(hero: Character):
                 raw_damage = monster.attack(hero)
 
     if hero.is_alive:
-        combat_log.append([f"🎉🎊🥳🎊🎉", f"", f"CONGRATULATIONS! You have completed the game!", hero.see_stats()])
+        combat_log.append([f"😀            ", f"", f"", hero.see_stats()])
+        combat_log.append([f"😁            ", f"", f"", hero.see_stats()])
+        combat_log.append([f"🥳   😎🤩", f"", f"", hero.see_stats()])
+        combat_log.append([f"🥳🎊 🎉😎🤩🎉", f"", f"CONGRATULATIONS! You have completed the game!", hero.see_stats()])
     else:
-        combat_log.append([f"☠️", f"", f"You died on level {number_of_monsters- len(monsters)}", hero.see_stats()])
+        combat_log.append([f"☠️ ", f"", f"You died on level {number_of_monsters- len(monsters)}", hero.see_stats()])
+        combat_log.append([f"☠️ 😢", f"", f"", hero.see_stats()])
+        combat_log.append([f"☠️ 😢😭", f"", f"", hero.see_stats()])
+        combat_log.append([f"☠️ 😢😭😱", f"", f"Your friends miss you", hero.see_stats()])
+
 
 def character_creation(equipment_names):
     combat_log.append(["😔", "", "", ""])
@@ -144,7 +153,8 @@ def character_creation(equipment_names):
     combat_log.append(["😀", "", "", ""])
     hero = Character(hero_attributes)
     hero = hero_equip_items(equipment_names, hero)
-    return hero 
+    return hero
+
 
 def hero_equip_items(equipment_names: list, hero: Character):
     for item in equipment_names:
@@ -164,11 +174,10 @@ def run_dungeon(items):
     enter_the_dungeon(hero)
     return combat_log
 
+
 if __name__ == "__main__":
-    hero = character_creation(["knuckles", "fish", "woven_hat", "the_armored_blouse"])
+    hero = character_creation(["boxing_gloves", "fish", "rose_hat", "the_armored_blouse"])
     hero.see_stats()
     enter_the_dungeon(hero)
     for line in combat_log:
         print("\t".join(line))
-
-
