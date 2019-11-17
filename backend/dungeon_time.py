@@ -19,7 +19,7 @@ with open("backend/equipment.yaml", "r") as equipment_file:
 
 global hero_attributes
 global max_stamina
-max_stamina = 15
+max_stamina = 50
 stamina_per_attack = 10
 hero_attributes = {
     "isHero": True,
@@ -151,7 +151,17 @@ def character_creation(equipment_names):
     combat_log.append(["😏", "", "", ""])
     combat_log.append(["😁", "", "Welcome adventurer", ""])
     combat_log.append(["😀", "", "", ""])
-    hero = Character(hero_attributes)
+    hero = Character({
+        "isHero": True,
+        "icon": "😀",
+        "name": "Hero",
+        "attack": 10,
+        "attack_max": 20,
+        "health": 150,
+        "armor": 0,
+        "stamina": 50,
+        "effect": []
+    })
     hero = hero_equip_items(equipment_names, hero)
     return hero
 
